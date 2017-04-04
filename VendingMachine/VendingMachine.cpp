@@ -16,7 +16,6 @@ public:
 	string name;
 	double price;
 	int qty;
-
 };
 
 item::item(string n, double p, int q) {
@@ -42,9 +41,7 @@ public:
 
 
 
-Vending::Vending() {
-
-}
+Vending::Vending() {}
 void Vending::dropItem() {}
 void Vending::displayPrice() {}
 void Vending::dispenceCash() {}
@@ -53,18 +50,13 @@ void Vending::displayError(string e) {}
 void Vending::reset() {}
 bool Vending::checkInput(int) { return true; }
 bool Vending::checkLocation(Vending cafe, int loc) {
-	if (loc <= cafe.slots.size()) {
+	if (loc <= cafe.slots.size())
 		return true;
-	}
-	else {
-		//cout << cafe.slots.size() << endl;
+	else
 		return false;
-	}
 }
 
-void Display() {
-
-}
+void Display() {}
 
 int main() {
 	cout << "Welcome to VenMach Tech INC." << endl;
@@ -74,6 +66,8 @@ int main() {
 	int itemsInVendingMachine = 40;
 	Vending cafe;
 
+
+
 	for (int i = 0; i < itemsInVendingMachine - cafe.slots.size(); i++)
 	{
 		item e("Cake", 1.25, 5);
@@ -81,41 +75,36 @@ int main() {
 	}
 
 	while (notDone) {
-
+		// Input area. Creates a int vector to index later
 		string e;
 		vector<int> inputs;
+
 		do
 		{
 			int input;
 			cin >> input;
+
 			if (cafe.checkLocation(cafe, input))
-			{
 				inputs.push_back(input);
-			}
 			else {
 				cout << "Invalid Location" << endl;
 				cout << "Please try again" << endl;
 			}
+
 			cout << "Would you like to pick more? N/Y" << endl;
 			cin >> e;
-
 		} while (e == "Y" || e == "y");
 
 
-
-		// start of selection
+		// start of stuff
 		for each (int _item in inputs)
 		{
-			if (cafe.checkLocation(cafe, _item)) {
+			if (cafe.checkLocation(cafe, _item)) 
 				cout << endl << "The " << cafe.slots[_item].name << "'s price is " << cafe.slots[_item].price << "." << endl << endl;
-
-			}
 		}
-
 		cout << "Would you like check out?" << endl;
-
 	}
-	cout << "Thank you shop again!" << endl;
 
+	cout << "Thank you shop again!" << endl;
 	getch();
 }

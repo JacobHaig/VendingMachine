@@ -37,7 +37,7 @@ public:
 	vector<item> slots = {};
 	Vending();
 	void dropItem();
-	void displayItemInformation(Vending, int);
+	void displayItemInformation(Vending, vector<int>);
 	void dispenceCash();
 	void restock();
 	void displayError(string e);
@@ -47,8 +47,13 @@ public:
 };
 Vending::Vending() {}
 void Vending::dropItem() {}
-void Vending::displayItemInformation(Vending cafe, int _item) {
-	cout << "The " << cafe.slots[_item].name << "'s price is " << cafe.slots[_item].price << "." << endl;
+void Vending::displayItemInformation(Vending cafe, vector<int> inputs) {
+	for (int j = 0; j < 1; j++) {
+		for (int i = j; i < inputs.size() % 6; i++) {
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(70 + 15 * j),SHORT(i + 12) });
+			cout << i + i*j + 1 << ". " << cafe.slots[inputs[i + i*j]].name << "  - " << cafe.slots[inputs[i + i*j]].price << endl;
+		}
+	}
 }
 
 void Vending::dispenceCash() {}
@@ -57,12 +62,9 @@ void Vending::displayError(string e) {}
 void Vending::reset() {}
 bool Vending::checkInput(int) { return true; }
 bool Vending::checkLocation(Vending cafe, int loc) {
-	if (loc <= cafe.slots.size())
-		return true;
-	else
-		return false;
-}
+	if (loc <= cafe.slots.size()) return true; else return false;
 
+}
 
 
 namespace Screen {
@@ -175,22 +177,32 @@ namespace Screen {
 		}
 	}
 
-	void drawItemsInVend(Vending cafe, int depth = 0) {
-		for (int i = depth; i < cafe.slots.size() - depth; i++) {
+	void drawItemsInVend(Vending cafe, int depth = 0, int arrow = 0) {
 
+		for (int i = depth; i < cafe.slots.size(); i++) {
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 8,SHORT(i + 2) });
-			cout << "Item: " << cafe.slots[i].name << " Price: $" << cafe.slots[i].price << " Qty: " << cafe.slots[i].qty << endl;
+			if (i == arrow) std::cout << '*'; else std::cout << ' ';
+			std::cout << "Item: " << cafe.slots[i].name << " Price: $" << cafe.slots[i].price << " Qty: " << cafe.slots[i].qty << endl;
 		}
+
+	}
+
+	char getInput() {
+		char key = _getch();
+		return key;
 	}
 };
 
 int main() {
-	cout << "Welcome to VenMach Tech INC." << endl;
-	cout << "Please make a selection" << endl;
+	//cout << "Welcome to VenMach Tech INC." << endl;
+	//cout << "Please make a selection" << endl;
 
 	bool notDone = true;
 	int itemsInVendingMachine = 40;
 	Vending cafe;
+
+	item e("Casssske", 1.25, 5);
+	cafe.slots.push_back(e);
 
 	for (int i = 0; i < itemsInVendingMachine - cafe.slots.size(); i++) {
 		item e("Cake", 1.25, 5);
@@ -199,16 +211,30 @@ int main() {
 
 	while (notDone) {
 		int depth = 0;
+		int arrow = 3;
 		string e;
-		vector<int> inputs;
+		char input = 'p';
+		vector < int > inputs;
+		system("CLS");
+		Screen::drawScreen(Screen::Selection());
+
 
 		do {
-			system("CLS");
-			Screen::drawScreen(Screen::Selection());
-			Screen::drawItemsInVend(cafe, depth);
-			int input;
-			cin >> input;
 
+			//Screen::drawScreen(Screen::Selection());
+			Screen::drawItemsInVend(cafe, depth, arrow);
+
+			input = Screen::getInput();
+			if (input == 'w')
+				if (!(arrow <= 0)) arrow -= 1;
+			if (input == 's')
+				if (!(arrow >= cafe.slots.size() - 1)) arrow += 1;
+			if (input == ' ') {
+				inputs.push_back(arrow);
+				cafe.displayItemInformation(cafe, inputs);
+			}
+
+			/*
 			if (cafe.checkLocation(cafe, input))
 				inputs.push_back(input);
 			else {
@@ -218,16 +244,16 @@ int main() {
 
 			cout << "Would you like to pick more? Y/N" << endl;
 			cin >> e;
-		} while (e == "Y" || e == "y");
-
+			for each(int _item in inputs) {
+				cafe.displayItemInformation(cafe, inputs);
+			}*/
+		} while (input != 'p');
 
 		// start of stuff
-		for each (int _item in inputs)
-		{
+		/*for each(int _item in inputs) {
 			cafe.displayItemInformation(cafe, _item);
-		}
+		}*/
 		cout << endl << "Would you like check out?" << endl;
-
 
 	}
 

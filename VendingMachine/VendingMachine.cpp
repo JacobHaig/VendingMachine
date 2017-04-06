@@ -31,6 +31,7 @@ item::item(string n, double p, int q) {
 }
 item::~item() {};
 
+
 class Vending {
 public:
 	vector<item> slots = {};
@@ -176,11 +177,13 @@ namespace Screen {
 		}
 	}
 
-	void drawItemsInVend(Vending cafe, int depth = 0, int arrow = 0) {
-		for (int i = depth; i < min(cafe.slots.size(), 24) - depth; i++) {
+	void drawItemsInVend(Vending cafe, int &depth, int arrow = 0) {
+		if (arrow > 24 + depth)
+			depth++;
+		for (int i = depth; i < min(cafe.slots.size(), 24 ) - depth; i++) {
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 8 , SHORT(i + 3) });
 			if (i == arrow) cout << "*"; else cout << " ";
-			cout << "Item: " << cafe.slots[i].name << " Price: $" << cafe.slots[i].price << " Qty: " << cafe.slots[i].qty << endl;
+			cout << "Item: " << cafe.slots[i + depth].name << " Price: $" << cafe.slots[i + depth].price << " Qty: " << cafe.slots[i].qty << "  " << endl;
 		}
 	}
 

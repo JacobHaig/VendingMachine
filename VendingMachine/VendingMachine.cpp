@@ -178,12 +178,11 @@ namespace Screen {
 	}
 
 	void drawItemsInVend(Vending cafe, int &depth, int arrow = 0) {
-		if (arrow > 24 + depth)
-			depth++;
-		for (int i = depth; i < min(cafe.slots.size(), 24 ) - depth; i++) {
+		//if (arrow > 24 + depth) depth++;
+		for (int i = depth; i < min(cafe.slots.size(), 24 + depth) - depth; i++) {
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 8 , SHORT(i + 3) });
 			if (i == arrow) cout << "*"; else cout << " ";
-			cout << "Item: " << cafe.slots[i + depth].name << " Price: $" << cafe.slots[i + depth].price << " Qty: " << cafe.slots[i].qty << "  " << endl;
+			cout << "Item: " << cafe.slots[i].name << " Price: $" << cafe.slots[i].price << " Qty: " << cafe.slots[i].qty << endl;
 		}
 	}
 
@@ -195,12 +194,12 @@ int main() {
 
 	item e("Pie", 1.85, 3);
 	cafe.slots.push_back(e);
-	e.~item();
+	//delete e;
 	item r("Soda", 1.5, 8);
 	cafe.slots.push_back(r);
 
 
-	int itemsInVendingMachine = 40 - cafe.slots.size();
+	int itemsInVendingMachine = 24 - cafe.slots.size();
 	for (int i = 0; i < itemsInVendingMachine; i++) {
 		item e("Cake", 1.25, 5);
 		cafe.slots.push_back(e);

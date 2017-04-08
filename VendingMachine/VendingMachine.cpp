@@ -39,10 +39,12 @@ int main() {
 		Utils::Screen::drawItemsInVend(cafe, depth, arrow);
 		input = _getch();
 
-		if (input == 'w')if (arrow > 0)arrow--;
-		if (input == 's')if (arrow < cafe->slots.size() - 1)arrow++;
-		if (input == ' ') if (inputs.size() < 10)inputs.push_back(arrow);
+		//Inputs and condistions
+		if (input == 'w' && arrow > 0) arrow--;
+		if (input == 's' && arrow < cafe->slots.size() - 1) arrow++;
+		if (input == ' ' && inputs.size() < 10) inputs.push_back(arrow);
 
+		//Print your selection to the selected area
 		cafe->displayItemInformation(cafe, inputs);
 	} while (input != 'p');
 

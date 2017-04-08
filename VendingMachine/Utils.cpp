@@ -14,6 +14,7 @@
 using namespace std;
 
 namespace Utils {
+	// Not used 
 	vector<string> Screen::Menu() { // returns Map1 
 		vector<string> Map = {
 			{ "                                                                                                                         \n" },
@@ -52,6 +53,8 @@ namespace Utils {
 		};
 		return Map;
 	}
+
+	// Map of Selection screen
 	vector<string> Screen::Selection() { // returns Map1 
 		vector<string> Map = {
 			{ "                                                                                                                         \n" },
@@ -87,8 +90,8 @@ namespace Utils {
 		return Map;
 	}
 
-	void Screen::drawScreen(vector<string> Map) {//This is the "rendering" function
-										 //vector<string> Map = Screen::Menu();
+	//This is the rendering function. It draws the vector<string> maps to the screen
+	void Screen::drawScreen(vector<string> Map) {
 		for (short i = 0; i < Map.size(); i++)
 		{
 			for (short j = 0; j < Map[i].length(); j++)
@@ -110,6 +113,7 @@ namespace Utils {
 		}
 	}
 
+	// Draws all the Items that are added to the slots of Machine
 	void Screen::drawItemsInVend(Machine *cafe, int &depth, int arrow) {
 		//if (arrow > 24 + depth) depth++;
 		for (int i = depth; i < min(cafe->slots.size(), 24 + depth) - depth; i++) {
@@ -119,6 +123,7 @@ namespace Utils {
 		}
 	}
 
+	// Puts all the Items from Items.txt into cafe.txt
 	void Screen::importVend(Machine *cafe) {
 		ifstream file("items.txt");
 		Item items();

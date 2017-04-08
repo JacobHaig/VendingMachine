@@ -11,7 +11,7 @@ public:
 	vector<Item> slots = {};
 	Machine();
 	void dropItem();
-	void displayItemInformation(Machine, vector<int>);
+	void displayItemInformation(Machine *, vector<int>);
 	void dispenceCash();
 	void restock();
 	void displayError(string e);

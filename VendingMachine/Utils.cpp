@@ -109,12 +109,12 @@ namespace Utils {
 		}
 	}
 
-	void Screen::drawItemsInVend(Machine cafe, int &depth, int arrow) {
+	void Screen::drawItemsInVend(Machine *cafe, int &depth, int arrow) {
 		//if (arrow > 24 + depth) depth++;
-		for (int i = depth; i < min(cafe.slots.size(), 24 + depth) - depth; i++) {
+		for (int i = depth; i < min(cafe->slots.size(), 24 + depth) - depth; i++) {
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 8 , SHORT(i + 3) });
 			if (i == arrow) cout << "*"; else cout << " ";
-			cout << "Item: " << cafe.slots[i].name << " Price: $" << cafe.slots[i].price << " Qty: " << cafe.slots[i].qty << endl;
+			cout << "Item: " << cafe->slots[i].name << " Price: $" << cafe->slots[i].price << " Qty: " << cafe->slots[i].qty << endl;
 		}
 	}
 }

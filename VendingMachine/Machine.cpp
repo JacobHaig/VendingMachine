@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 Machine::Machine() {}
 Machine::~Machine() {}
 void Machine::dropItem() {}
@@ -42,3 +41,5 @@ bool Machine::checkInput(int) { return true; }
 bool Machine::checkLocation(Machine cafe, int loc) {
 	if (loc <= cafe.slots.size()) return true; else return false;
 }
+
+

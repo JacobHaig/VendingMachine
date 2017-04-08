@@ -10,5 +10,6 @@ namespace Utils {
 		static vector<string> Selection();
 		static void drawScreen(vector<string> Map);
 		static void drawItemsInVend(Machine *cafe, int &depth, int arrow = 0);
+		static void importVend(Machine *cafe);
 	};
 }

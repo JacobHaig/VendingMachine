@@ -4,6 +4,7 @@
 #include "Machine.h"
 
 #include <string>
+#include <fstream>
 #include <windows.h>
 #include <iostream>
 #include <vector>
@@ -116,5 +117,20 @@ namespace Utils {
 			if (i == arrow) cout << "*"; else cout << " ";
 			cout << "Item: " << cafe->slots[i].name << " Price: $" << cafe->slots[i].price << " Qty: " << cafe->slots[i].qty << endl;
 		}
+	}
+
+	void Screen::importVend(Machine *cafe) {
+		ifstream file("items.txt");
+		Item items();
+		string str;
+		while (getline(file, str)) {
+			string a;
+			double b;
+			int c;
+			file >> a >> b >> c;
+			Item items(a, b, c);
+			cafe->slots.push_back(items);
+		}
+		file.close();
 	}
 }

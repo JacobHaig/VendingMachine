@@ -2,7 +2,6 @@
 #include <vector>
 #include "Item.h"
 
-
 class Machine
 {
 public:

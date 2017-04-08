@@ -20,31 +20,18 @@
 
 using namespace std;
 
-
-
 int main() {
-
+	//Initalize programs varibles 
 	Machine *cafe = new Machine;
 	int depth = 0;
 	char input;
 	vector<int> inputs;
-	int arrow = 3;
+	int arrow = 0;
 
+	// Write files contents in to cafe->slots
+	Utils::Screen::importVend(cafe);
 
-	Item e("Pie", 1.85, 3);
-	cafe->slots.push_back(e);
-	//delete e;
-	Item r("Soda", 1.5, 8);
-	cafe->slots.push_back(r);
-
-
-	int itemsInVendingMachine = 24 - cafe->slots.size();
-	for (int i = 0; i < itemsInVendingMachine; i++) {
-		Item e("Cake", 1.25, 5);
-		cafe->slots.push_back(e);
-	}
-
-
+	// Draw to the screen
 	system("CLS");
 	Utils::Screen::drawScreen(Utils::Screen::Selection());
 
@@ -59,6 +46,5 @@ int main() {
 		cafe->displayItemInformation(cafe, inputs);
 	} while (input != 'p');
 
-	cout << "Thank you shop again!" << endl;
 	getch();
 }

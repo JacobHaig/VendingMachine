@@ -10,6 +10,7 @@
 #include <vector>
 #include <conio.h>
 #include <string>
+#include <math.h>
 
 #include <windows.h>
 #include <mmsystem.h>
@@ -37,7 +38,7 @@ int main() {
 	Utils::Screen::drawScreen(Utils::Screen::Selection());
 
 	do {
-		Utils::Screen::drawItemsInVend(cafe, depth, arrow);
+		Utils::Screen::drawItemsInVend(cafe);
 		//input = _getch();
 		cin >> input_num;
 
@@ -45,9 +46,11 @@ int main() {
 		//if (input == 'w' && arrow > 0) arrow--;
 		//if (input == 's' && arrow < cafe->slots.size() - 1) arrow++;
 		//if (input == ' ' && inputs.size() < 10) inputs.push_back(arrow);
-		inputs.push_back(input_num-1);
-		
-		
+
+		int  remain = 4 * floor(input_num / 100) - 4 + (input_num % 100);
+		inputs.push_back(remain - 1);
+
+
 
 		//Print your selection to the selected area
 		cafe->displayItemInformation(cafe, inputs);

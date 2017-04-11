@@ -114,12 +114,17 @@ namespace Utils {
 	}
 
 	// Draws all the Items that are added to the slots of Machine
-	void Screen::drawItemsInVend(Machine *cafe, int &depth, int arrow) {
+	void Screen::drawItemsInVend(Machine *cafe) {
 		//if (arrow > 24 + depth) depth++;
-		for (int i = depth; i < min(cafe->slots.size(), 24 + depth) - depth; i++) {
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 8 , SHORT(i + 3) });
-			//if (i == arrow) cout << "*"; else cout << " ";
-			cout << i + 1 << ": " << cafe->slots[i].name << " $" << cafe->slots[i].price << " Qty: " << cafe->slots[i].qty << endl;
+		for (int i = 0; i < min(cafe->slots.size(), 24); i++) {
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 7 , SHORT(i + 3) });
+			if (i < 4) cout << 10 << i + 1;
+			else if (i < 8) cout << 20 << i - 4 + 1;
+			else if (i < 12) cout << 30 << i - 8 + 1;
+			else if (i < 16) cout << 40 << i - 12 + 1;
+			else cout << 50 << i - 16 + 1;
+
+			cout << ": " << cafe->slots[i].name << " $" << cafe->slots[i].price << " Qty: " << cafe->slots[i].qty << endl;
 		}
 	}
 

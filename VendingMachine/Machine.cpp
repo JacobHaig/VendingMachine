@@ -13,7 +13,7 @@ void Machine::displayItemInformation(Machine *cafe, vector<int> inputs) {
 	if (inputs.size() <= 5)
 		for (int i = 0; i < inputs.size(); i++)
 		{
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(70),SHORT(i + 12) });
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(i + 12) });
 			cout << i + 1 << ". " << cafe->slots[inputs[i]].name << "  - " << cafe->slots[inputs[i]].price << endl;
 		}
 	if (inputs.size() > 5)

@@ -25,6 +25,7 @@ int main() {
 	Machine *cafe = new Machine;
 	int depth = 0;
 	char input;
+	int input_num;
 	vector<int> inputs;
 	int arrow = 0;
 
@@ -37,16 +38,20 @@ int main() {
 
 	do {
 		Utils::Screen::drawItemsInVend(cafe, depth, arrow);
-		input = _getch();
+		//input = _getch();
+		cin >> input_num;
 
 		//Inputs and condistions
-		if (input == 'w' && arrow > 0) arrow--;
-		if (input == 's' && arrow < cafe->slots.size() - 1) arrow++;
-		if (input == ' ' && inputs.size() < 10) inputs.push_back(arrow);
+		//if (input == 'w' && arrow > 0) arrow--;
+		//if (input == 's' && arrow < cafe->slots.size() - 1) arrow++;
+		//if (input == ' ' && inputs.size() < 10) inputs.push_back(arrow);
+		inputs.push_back(input_num-1);
+		
+		
 
 		//Print your selection to the selected area
 		cafe->displayItemInformation(cafe, inputs);
-	} while (input != 'p');
+	} while (input_num != '0');
 
 	getch();
 }

@@ -119,7 +119,7 @@ namespace Utils {
 		for (int i = depth; i < min(cafe->slots.size(), 24 + depth) - depth; i++) {
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 8 , SHORT(i + 3) });
 			//if (i == arrow) cout << "*"; else cout << " ";
-			cout << i + 1 << ": Item: " << cafe->slots[i].name << " Price: $" << cafe->slots[i].price << " Qty: " << cafe->slots[i].qty << endl;
+			cout << i + 1 << ": " << cafe->slots[i].name << " $" << cafe->slots[i].price << " Qty: " << cafe->slots[i].qty << endl;
 		}
 	}
 

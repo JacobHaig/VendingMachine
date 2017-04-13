@@ -41,7 +41,8 @@ int main() {
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(18) });
 		cout << "       ";
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(18) });
-		//input = _getch();
+		
+		// Input
 		cin >> input_val;
 
 
@@ -49,13 +50,15 @@ int main() {
 		catch (const std::exception&) { input_num = 1; }
 
 
-
 		if (input_num < 100)
+			//Print generic error
 			Utils::Screen::wrongInfo();
 
 		else
 		{
+			//convert location to array location
 			int  remain = 4 * floor(input_num / 100) - 4 + input_num % 100;
+			//Add array location to list of seleected items
 			if (inputs.size() < 10 && remain < cafe->slots.size())inputs.push_back(remain - 1);
 		}
 

@@ -64,8 +64,8 @@ namespace Utils {
 			{ "     #                                      #                #    +/  +/    #    #    /___/    #   #     select    #     \n" },
 			{ "     #                                      #                ################    ###############   #################     \n" },
 			{ "     #                                      #                                                                            \n" },
-			{ "     #                                      #                             Select your items via the Arrows                \n" },
-			{ "     #                                      #                                                                            \n" },
+			{ "     #                                      #                             Enter the item number to select                \n" },
+			{ "     #                                      #                                 the Item from the list                     \n" },
 			{ "     #                                      #                                                                            \n" },
 			{ "     #                                      #                                                                            \n" },
 			{ "     #                                      #                #######################################################     \n" },
@@ -75,8 +75,8 @@ namespace Utils {
 			{ "     #                                      #                #                                                     #     \n" },
 			{ "     #                                      #                #                                                     #     \n" },
 			{ "     #                                      #                #######################################################     \n" },
-			{ "     #                                      #                                                                            \n" },
-			{ "     #                                      #                                                                            \n" },
+			{ "     #                                      #                 #              #                   #                #      \n" },
+			{ "     #                                      #                 ################                   ##################      \n" },
 			{ "     #                                      #                                                                            \n" },
 			{ "     #                                      #                                                                            \n" },
 			{ "     #                                      #                                                                            \n" },
@@ -142,5 +142,14 @@ namespace Utils {
 			cafe->slots.push_back(items);
 		}
 		file.close();
+	}
+
+	void Screen::wrongInfo() {
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(70),SHORT(10) });
+
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY);
+		cout << "Wrong Information Please Try Again.";
+
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7 | FOREGROUND_INTENSITY);
 	}
 }

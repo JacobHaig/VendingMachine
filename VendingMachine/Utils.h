@@ -11,5 +11,6 @@ namespace Utils {
 		static void drawScreen(vector<string> Map);
 		static void drawItemsInVend(Machine *cafe);
 		static void importVend(Machine *cafe);
+		static void wrongInfo();
 	};
 }

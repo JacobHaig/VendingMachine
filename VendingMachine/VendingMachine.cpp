@@ -24,11 +24,10 @@ using namespace std;
 int main() {
 	//Initalize programs varibles 
 	Machine *cafe = new Machine;
-	int depth = 0;
+	int depth = 0, input_num;
 	char input;
-	int input_num;
+	string input_val;
 	vector<int> inputs;
-	int arrow = 0;
 
 	// Write files contents in to cafe->slots
 	Utils::Screen::importVend(cafe);
@@ -36,25 +35,37 @@ int main() {
 	// Draw to the screen
 	system("CLS");
 	Utils::Screen::drawScreen(Utils::Screen::Selection());
+	Utils::Screen::drawItemsInVend(cafe);
 
 	do {
-		Utils::Screen::drawItemsInVend(cafe);
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(18) });
+		cout << "       ";
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(18) });
 		//input = _getch();
-		cin >> input_num;
+		cin >> input_val;
 
-		//Inputs and condistions
-		//if (input == 'w' && arrow > 0) arrow--;
-		//if (input == 's' && arrow < cafe->slots.size() - 1) arrow++;
-		//if (input == ' ' && inputs.size() < 10) inputs.push_back(arrow);
 
-		int  remain = 4 * floor(input_num / 100) - 4 + (input_num % 100);
-		inputs.push_back(remain - 1);
+		try { input_num = stoi(input_val); }
+		catch (const std::exception&) { input_num = 1; }
 
+
+
+		if (input_num < 100)
+			Utils::Screen::wrongInfo();
+
+		else
+		{
+			int  remain = 4 * floor(input_num / 100) - 4 + input_num % 100;
+			if (inputs.size() < 10 && remain < cafe->slots.size())inputs.push_back(remain - 1);
+		}
 
 
 		//Print your selection to the selected area
 		cafe->displayItemInformation(cafe, inputs);
-	} while (input_num != '0');
+	} while (input_val != " ");
+
+	//change
+
 
 	getch();
 }

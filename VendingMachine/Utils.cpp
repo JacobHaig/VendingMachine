@@ -122,7 +122,8 @@ namespace Utils {
 			else if (i < 8) cout << 20 << i - 4 + 1;
 			else if (i < 12) cout << 30 << i - 8 + 1;
 			else if (i < 16) cout << 40 << i - 12 + 1;
-			else cout << 50 << i - 16 + 1;
+			else if (i < 20) cout << 50 << i - 16 + 1;
+			else cout << 60 << i - 20 + 1;
 
 			cout << ": " << cafe->slots[i].name << " $" << cafe->slots[i].price << " Qty: " << cafe->slots[i].qty << endl;
 		}

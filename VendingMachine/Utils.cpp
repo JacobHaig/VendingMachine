@@ -153,4 +153,40 @@ namespace Utils {
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7 | FOREGROUND_INTENSITY);
 	}
+
+	
+
+	void Screen::Dispense(double M, int C, int Q, int D, int N, int P)
+	{
+		int credit = money * 100;
+		while (money >= 25)
+		{
+			quarter++;
+			money -= 25;
+		}
+
+		while (money >= 10)
+		{
+			dime++;
+			money -= 10;
+		}
+
+		while (money >= 5)
+		{
+			nickel++;
+			money -= 5;
+		}
+
+		while (money >= 1)
+		{
+			penny++;
+			money -= 1;
+		}
+		cout << "quarters:" << quarter << endl;
+		cout << "dimes:" << dime << endl;
+		cout << "nickels:" << nickel << endl;
+		cout << "pennies:" << penny << endl;
+		_getch();
+	}
+
 }

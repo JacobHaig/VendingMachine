@@ -12,5 +12,6 @@ namespace Utils {
 		static void drawItemsInVend(Machine *cafe);
 		static void importVend(Machine *cafe);
 		static void wrongInfo();
+		static void Dispense(double M, int C, int Q, int D, int N, int P);
 	};
 }

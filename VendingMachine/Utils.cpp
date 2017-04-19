@@ -14,8 +14,7 @@
 using namespace std;
 
 namespace Utils {
-	// Not used 
-	vector<string> Screen::Menu() { // returns Map1 
+	vector<string> Screen::Menu() { // returns Map1
 		vector<string> Map = {
 			{ "                                                                                                                         \n" },
 			{ "                                                                                                                         \n" },
@@ -52,23 +51,23 @@ namespace Utils {
 			{ "                                                                                                                         \n" },
 		};
 		return Map;
-	}
+	}// Not used
 
-	// Map of Selection screen
-	vector<string> Screen::Selection() { // returns Map1 
+	vector<string> Screen::Selection() { // returns Map1
 		vector<string> Map = {
 			{ "                                                                                                                         \n" },
-			{ "     ########################################                ################    ###############   #################     \n" },
-			{ "     #                                      #                #  +        /  #    #    /'__/    #   #     Space     #     \n" },
-			{ "     #                                      #                #   +  /+  /   #    #    +__ +    #   #      to       #     \n" },
-			{ "     #                                      #                #    +/  +/    #    #    /___/    #   #     select    #     \n" },
-			{ "     #                                      #                ################    ###############   #################     \n" },
+			{ "     ########################################                      Select your items by typing the ID here:              \n" },
 			{ "     #                                      #                                                                            \n" },
-			{ "     #                                      #                             Enter the item number to select                \n" },
-			{ "     #                                      #                                 the Item from the list                     \n" },
+			{ "     #                                      #                            Once you are done, type 'done'                  \n" },
+			{ "     #                                      #                                                                            \n" },
+			{ "     #                                      #                                                                            \n" },
+			{ "     #                                      #                                                                            \n" },
+			{ "     #                                      #                                                                            \n" },
 			{ "     #                                      #                                                                            \n" },
 			{ "     #                                      #                                                                            \n" },
 			{ "     #                                      #                #######################################################     \n" },
+			{ "     #                                      #                #                                                     #     \n" },
+			{ "     #                                      #                #                                                     #     \n" },
 			{ "     #                                      #                #                                                     #     \n" },
 			{ "     #                                      #                #                                                     #     \n" },
 			{ "     #                                      #                #                                                     #     \n" },
@@ -88,10 +87,10 @@ namespace Utils {
 			{ "     ########################################                                                                            \n" }
 		};
 		return Map;
-	}
+	}// Map of Selection screen
 
-	//This is the rendering function. It draws the vector<string> maps to the screen
 	void Screen::drawScreen(vector<string> Map) {
+		//This is the rendering function. It draws the vector<string> maps to the screen
 		for (short i = 0; i < Map.size(); i++)
 		{
 			for (short j = 0; j < Map[i].length(); j++)
@@ -113,9 +112,7 @@ namespace Utils {
 		}
 	}
 
-	// Draws all the Items that are added to the slots of Machine
-	void Screen::drawItemsInVend(Machine *cafe) {
-		//if (arrow > 24 + depth) depth++;
+	void Screen::drawItemsInVend(Machine *cafe) {// Draws all the Items that are added to the slots of Machine
 		for (int i = 0; i < min(cafe->slots.size(), 24); i++) {
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 7 , SHORT(i + 3) });
 			if (i < 4) cout << 10 << i + 1;
@@ -129,7 +126,6 @@ namespace Utils {
 		}
 	}
 
-	// Puts all the Items from Items.txt into cafe.txt
 	void Screen::importVend(Machine *cafe) {
 		ifstream file("items.txt");
 		Item items();
@@ -143,7 +139,7 @@ namespace Utils {
 			cafe->slots.push_back(items);
 		}
 		file.close();
-	}
+	}// Puts all the Items from Items.txt into cafe.txt
 
 	void Screen::wrongInfo() {
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(70),SHORT(10) });
@@ -153,40 +149,4 @@ namespace Utils {
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7 | FOREGROUND_INTENSITY);
 	}
-
-	
-
-	void Screen::Dispense(double M, int C, int Q, int D, int N, int P)
-	{
-		int credit = money * 100;
-		while (money >= 25)
-		{
-			quarter++;
-			money -= 25;
-		}
-
-		while (money >= 10)
-		{
-			dime++;
-			money -= 10;
-		}
-
-		while (money >= 5)
-		{
-			nickel++;
-			money -= 5;
-		}
-
-		while (money >= 1)
-		{
-			penny++;
-			money -= 1;
-		}
-		cout << "quarters:" << quarter << endl;
-		cout << "dimes:" << dime << endl;
-		cout << "nickels:" << nickel << endl;
-		cout << "pennies:" << penny << endl;
-		_getch();
-	}
-
 }

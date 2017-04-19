@@ -1,4 +1,3 @@
-
 #include "stdafx.h"
 #include "Item.h"
 #include "Machine.h"
@@ -22,7 +21,7 @@
 using namespace std;
 
 int main() {
-	Machine *cafe = new Machine;//Initalize programs varibles 
+	Machine *cafe = new Machine;//Initalize programs varibles
 	int depth = 0, input_num;
 	char input;
 	string input_val;
@@ -35,9 +34,9 @@ int main() {
 	Utils::Screen::drawItemsInVend(cafe);
 
 	do {
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(18) });
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(19) });
 		cout << "       ";
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(18) });
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(19) });
 		cin >> input_val;// Input
 
 		try { input_num = stoi(input_val); }
@@ -51,27 +50,40 @@ int main() {
 		}
 
 		cafe->displayItemInformation(cafe, inputs);//Print your selection to the selected area
-	} while (input_val != " ");
+	} while (input_val != "done");
 
+	system("CLS");
 	Utils::Screen::drawScreen(Utils::Screen::Menu());
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(18) });
-	cout << "Enter your payment type. Credit/Debt/Cash :";
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(35),SHORT(6) });
+	cout << "Enter your payment type. Credit/Debt/Cash: $";
 	string str;
 
 	do
 	{
 		cin >> str;
-		if (str == "Cash" &&str == "cash"&&str == "Credit"&&str == "credit"&&str == "debt"&&str == "Debt")
+		if (str == "Credit" || str == "credit" || str == "debt" || str == "Debt")
+			cafe->dropItem(cafe, inputs);
+		else if (str == "Cash" || str == "cash")
 		{
-			if (str == "Credit"&&str == "credit"&&str == "debt"&&str == "Debt")
-				cout << "dispence";
-			else
-				
-			//change
-		}
-		else
-			str = "NOPE";
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(30),SHORT(7) });
+			cout  << "Enter your capital: ";
+			double money;
+			float sum = 0;
 
+			do {
+				cin >> money;
+				for each(int v in inputs) sum += cafe->slots[v].price;
+
+				if (money > sum) {
+					cafe->dispenceCash(money - sum);
+					cafe->dropItem(cafe, inputs);
+				}
+				else cout << "insoficant funds. Try again!";
+
+			} while (money < sum);
+		}
+
+		else str = "NONE";
 	} while (str == "NONE");
 
 	getch();

@@ -9,9 +9,9 @@ public:
 	~Machine();
 	vector<Item> slots = {};
 	Machine();
-	void dropItem();
+	void dropItem(Machine *, vector<int>);
 	void displayItemInformation(Machine *, vector<int>);
-	void dispenceCash();
+	void dispenceCash(double money = 0);
 	void restock();
 	void displayError(string e);
 	void reset();

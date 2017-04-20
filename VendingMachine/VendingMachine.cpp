@@ -26,6 +26,8 @@ int main() {
 	char input;
 	string input_val;
 	vector<int> inputs;
+	double money;
+	float sum = 0;
 
 	Utils::Screen::importVend(cafe);// Write files contents in to cafe->slots
 
@@ -34,6 +36,7 @@ int main() {
 	Utils::Screen::drawItemsInVend(cafe);
 
 	do {
+		cafe->totalMoney();
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(19) });
 		cout << "       ";
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(65),SHORT(19) });
@@ -54,29 +57,32 @@ int main() {
 
 	system("CLS");
 	Utils::Screen::drawScreen(Utils::Screen::Menu());
+	cafe->totalMoney();
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(35),SHORT(6) });
 	cout << "Enter your payment type. Credit/Debt/Cash: $";
 	string str;
 
 	do
 	{
+		
 		cin >> str;
 		if (str == "Credit" || str == "credit" || str == "debt" || str == "Debt")
 			cafe->dropItem(cafe, inputs);
 		else if (str == "Cash" || str == "cash")
 		{
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(30),SHORT(7) });
-			cout  << "Enter your capital: ";
-			double money;
-			float sum = 0;
+			cout << "Enter your capital: ";
+
 
 			do {
 				cin >> money;
 				for each(int v in inputs) sum += cafe->slots[v].price;
 
 				if (money > sum) {
+					cafe->totalMoneys -= sum;
 					cafe->dispenceCash(money - sum);
 					cafe->dropItem(cafe, inputs);
+					cafe->totalMoney();
 				}
 				else cout << "insoficant funds. Try again!";
 

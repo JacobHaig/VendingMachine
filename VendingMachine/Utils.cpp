@@ -8,6 +8,7 @@
 #include <windows.h>
 #include <iostream>
 #include <vector>
+#include <ctime>
 
 #include <stdexcept>
 
@@ -148,5 +149,11 @@ namespace Utils {
 		cout << "Wrong Information Please Try Again.";
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7 | FOREGROUND_INTENSITY);
+	}
+
+	void Screen::randomize(int range) {
+		int random;
+		srand(time(0));
+		random = rand() % range;
 	}
 }

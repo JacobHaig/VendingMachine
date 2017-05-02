@@ -64,29 +64,34 @@ int main() {
 
 	do
 	{
-		
+
 		cin >> str;
-		if (str == "Credit" || str == "credit" || str == "debt" || str == "Debt")
-			cafe->dropItem(cafe, inputs);
+		if (str == "Credit" || str == "credit" || str == "debt" || str == "Debt") cafe->dropItem(cafe, inputs);
+
 		else if (str == "Cash" || str == "cash")
 		{
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(30),SHORT(7) });
 			cout << "Enter your capital: ";
 
-
+			double moneys = 0;
+			for each(int v in inputs) sum += cafe->slots[v].price;
 			do {
 				cin >> money;
-				for each(int v in inputs) sum += cafe->slots[v].price;
+				moneys += money;
 
-				if (money > sum) {
-					cafe->totalMoneys -= sum;
-					cafe->dispenceCash(money - sum);
+
+				if (moneys >= sum) {
+					cafe->totalMoneys -= moneys - sum;
+					cafe->dispenceCash(moneys - sum);
 					cafe->dropItem(cafe, inputs);
 					cafe->totalMoney();
 				}
-				else cout << "insoficant funds. Try again!";
+				else {
+					SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { SHORT(0),SHORT(7) });
+					cout << "Entered: " << moneys << " Left: " << -moneys + sum << " ";
+				}
 
-			} while (money < sum);
+			} while (moneys < sum);
 		}
 
 		else str = "NONE";

@@ -5,7 +5,7 @@
 class Machine
 {
 public:
-	double totalMoneys = 15.26;
+	double totalMoneys;
 	~Machine();
 	vector<Item> slots = {};
 	Machine();

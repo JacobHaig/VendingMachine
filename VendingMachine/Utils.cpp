@@ -150,9 +150,11 @@ namespace Utils {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7 | FOREGROUND_INTENSITY);
 	}
 
-	void Screen::randomize(int range) {
+	void Screen::randomize( int range, Machine) {
 		int random;
+		Machine totlmon;
 		srand(time(0));
-		random = rand() % range;
+		totlmon.totalMoneys = rand() % 50;
+		
 	}
 }
